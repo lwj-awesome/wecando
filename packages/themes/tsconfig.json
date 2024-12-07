@@ -1,0 +1,6 @@
+{
+  "extends": "@wecando/typescript-config/base.json",
+  "compilerOptions": {
+    "outDir": "./dist"
+  }
+}
