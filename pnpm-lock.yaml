@@ -45,6 +45,9 @@ importers:
       '@wecando/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
+      '@wecando/themes':
+        specifier: workspace:*
+        version: link:../../packages/themes
       '@wecando/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config

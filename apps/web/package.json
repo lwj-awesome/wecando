@@ -19,6 +19,7 @@
   "devDependencies": {
     "@wecando/eslint-config": "workspace:*",
     "@wecando/typescript-config": "workspace:*",
+    "@wecando/themes": "workspace:*",
     "@types/node": "^20",
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.0",

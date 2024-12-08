@@ -9,15 +9,11 @@ interface ButtonProps {
 }
 
 export const Button = ({ children, className, appName }: ButtonProps) => {
-  const test = colors.palette.blue[200];
-  console.log(test);
+  const colorTest = colors.palette.yellow[500];
   return (
-    <button
-      className={className}
-      onClick={() => alert(`Hello from your ${appName} app!`)}
-    >
+    <button className={className}>
       {children}
-      <span style={{ color: test }}>zzzz</span>
+      <span style={{ color: colorTest }}> colorTest</span>
     </button>
   );
 };
