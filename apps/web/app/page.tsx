@@ -1,6 +1,11 @@
 import Image, { type ImageProps } from "next/image";
 import styles from "./page.module.css";
-import { RedTextColor, BlueTextColor, YellowTextColor } from "@wecando/themes";
+import {
+  RedTextColor,
+  BlueTextColor,
+  YellowTextColor,
+  fonts,
+} from "@wecando/themes";
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
   srcDark: string;
@@ -16,6 +21,8 @@ const ThemeImage = (props: Props) => {
     </>
   );
 };
+
+const 폰트잘됨 = fonts.heading["3xl"];
 export default function Home() {
   return (
     <div className={styles.page}>
@@ -30,7 +37,7 @@ export default function Home() {
           priority
         />
         <ol>
-          <li style={{ color: RedTextColor }}>
+          <li style={폰트잘됨}>
             Color Test
             <code style={{ color: YellowTextColor }}>
               apps/web/app/page.tsx

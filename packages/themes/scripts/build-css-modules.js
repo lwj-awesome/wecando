@@ -49,23 +49,67 @@ const generateThemeCssVars = () => {
       });
       return;
     }
-    const selector = ":root";
-    const cssVariables = Object.entries(value)
-      .map(([mainKey, mainValue]) =>
-        Object.entries(mainValue)
-          .map(
-            ([subkey, subValue]) =>
-              `--${toCssCasting(mainKey)}-${toCssCasting(subkey)}: ${subValue};`
-          )
-          .join("\n")
-      )
-      .join("\n");
-    return cssString.push(`${selector} {${cssVariables}}`);
   });
   return cssString;
 };
+
+// 뎁스를 더 들어가야할듯ㅎㅎ
+const generateThemeCssClasses = () => {
+  const cssString = [];
+  Object.entries(theme).forEach(([key, value]) => {
+    if (key === "fonts") {
+      const cssClasses = Object.entries(value)
+        .map(([mainKey, mainValue]) =>
+          Object.entries(mainValue)
+            .map(([subKey, subValue]) => {
+              const className = `.${toCssCasting(mainKey)}${toCssCasting(subKey)}`;
+              const styleProperties = Object.entries(subValue)
+                .map(
+                  ([styleKey, styleValue]) =>
+                    `${toCssCasting(styleKey)}: ${styleValue};`
+                )
+                .join("\n");
+
+              return `${className} {\n${styleProperties}\n}`;
+            })
+            .join("\n")
+        )
+        .join("\n");
+
+      cssString.push(cssClasses);
+    }
+  });
+  return cssString;
+};
+
+const generateCssVars = () => {
+  const cssString = [];
+  Object.entries(theme).forEach(([key, value]) => {
+    if (key === "vars") {
+      const selector = ":root";
+      const cssVariables = Object.entries(value)
+        .map(([mainKey, mainValue]) =>
+          Object.entries(mainValue)
+            .map(
+              ([subKey, subValue]) =>
+                `--${toCssCasting(mainKey)}-${toCssCasting(subKey)}: ${subValue};`
+            )
+            .join("\n")
+        )
+        .join("\n");
+      return cssString.push(`${selector} {\n${cssVariables}\n}`);
+    }
+  });
+  return cssString;
+};
+
 const generateThemeCss = () => {
   const varibales = generateThemeCssVars();
-  fs.writeFileSync("dist/themes.css", [...varibales].join("\n"));
+  const typography = generateThemeCssClasses();
+  const variable = generateCssVars();
+  fs.writeFileSync(
+    "dist/themes.css",
+    [...varibales, ...typography, ...variable].join("\n")
+  );
 };
 generateThemeCss();
